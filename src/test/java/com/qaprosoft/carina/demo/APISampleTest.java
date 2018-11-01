@@ -15,6 +15,10 @@
  */
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.core.foundation.utils.tag.Priority;
+import com.qaprosoft.carina.core.foundation.utils.tag.TestPriority;
+import com.qaprosoft.carina.core.foundation.utils.tag.TestTag;
+import org.apache.log4j.Logger;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.annotations.Test;
 
@@ -32,8 +36,17 @@ import com.qaprosoft.carina.demo.api.PostUserMethod;
  * @author qpsdemo
  */
 public class APISampleTest extends AbstractTest {
+
+    private static final Logger LOGGER = Logger.getLogger(APISampleTest.class);
+
     @Test(description = "JIRA#DEMO-0001")
     @MethodOwner(owner = "qpsdemo")
+    //@MethodOwner(owner = "qpsdemoAPI", platform = "api")
+    //@MethodOwner(owner = "qpsdemoDesktop", platform = "desktop")
+    @TestPriority(Priority.P0)
+    @TestTag(name = "area", value = "API0")
+    @TestTag(name = "priority", value = "P0")
+    @TestTag(name = "feature", value = "feature0")
     public void testCreateUser() throws Exception {
         PostUserMethod api = new PostUserMethod();
         api.expectResponseStatus(HttpResponseStatusType.CREATED_201);
@@ -43,6 +56,10 @@ public class APISampleTest extends AbstractTest {
 
     @Test(description = "JIRA#DEMO-0002")
     @MethodOwner(owner = "qpsdemo")
+    //@MethodOwner(owner = "qpsdemoAPI", platform = "api")
+    //@MethodOwner(owner = "qpsdemoDesktop", platform = "desktop")
+    @TestTag(name = "area22", value = "API2")
+    @TestTag(name = "specialization22", value = "negativ6")
     public void testCreateUserMissingSomeFields() throws Exception {
         PostUserMethod api = new PostUserMethod();
         api.getProperties().remove("name");
@@ -54,6 +71,7 @@ public class APISampleTest extends AbstractTest {
 
     @Test(description = "JIRA#DEMO-0003")
     @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P3)
     public void testGetUsers() {
         GetUserMethods getUsersMethods = new GetUserMethods();
         getUsersMethods.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -69,5 +87,18 @@ public class APISampleTest extends AbstractTest {
         deleteUserMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
         deleteUserMethod.callAPI();
         deleteUserMethod.validateResponse();
+    }
+
+    @Test(description = "JIRA#DEMO-0003")
+    @MethodOwner(owner = "qpsdemo", secondaryOwner = "secondOwner")
+    @TestPriority(Priority.P5)
+    @TestTag(name = "specialization local3", value = "negative8")
+    public void testGetUsersInSnapshot() {
+        LOGGER.info("Execute on snapshot.");
+        GetUserMethods getUsersMethods = new GetUserMethods();
+        getUsersMethods.expectResponseStatus(HttpResponseStatusType.OK_200);
+        getUsersMethods.callAPI();
+        getUsersMethods.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
+        getUsersMethods.validateResponseAgainstJSONSchema("api/users/_get/rs.schema");
     }
 }
