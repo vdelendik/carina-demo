@@ -108,4 +108,24 @@ public class WebSampleTest extends AbstractTest {
         Assert.assertTrue(false);
     }
 
+    @Test(description = "JIRA#CAR-12")
+    @MethodOwner(owner = "qpsdemo")
+    public void testNewsSearch2() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
+
+        NewsPage newsPage = homePage.getFooterMenu().openNewsPage();
+        Assert.assertTrue(newsPage.isPageOpened(), "News page is not opened!");
+
+        final String searchQ = "iphone";
+        List<NewsItem> news = newsPage.searchNews(searchQ);
+        Assert.assertFalse(CollectionUtils.isEmpty(news), "News not found!");
+        for(NewsItem n : news) {
+            System.out.println(n.readTitle());
+            Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
+        }
+        Assert.assertTrue(false);
+    }
+
 }
