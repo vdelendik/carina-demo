@@ -88,7 +88,7 @@ public class WebSampleTest extends AbstractTest {
         Assert.assertEquals(specs.get(2).readSpec(SpecType.ANNOUNCED), "2017, June");
     }
     
-    @Test(description = "JIRA#AUTO-0010")
+    @Test(description = "JIRA#CAR-11")
     @MethodOwner(owner = "qpsdemo")
     public void testNewsSearch() {
         HomePage homePage = new HomePage(getDriver());
@@ -105,6 +105,7 @@ public class WebSampleTest extends AbstractTest {
             System.out.println(n.readTitle());
             Assert.assertTrue(StringUtils.containsIgnoreCase(n.readTitle(), searchQ), "Invalid search results!");
         }
+        Assert.assertTrue(false);
     }
 
 }
