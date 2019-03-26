@@ -50,7 +50,7 @@ public class WebSampleTest extends AbstractTest {
     @TestTag(name = "area test", value = "data provider")
     @TestTag(name = "specialization", value = "xlsx")
     @XlsDataSourceParameters(path = "xls/demo.xlsx", sheet = "GSMArena", dsUid = "TUID", dsArgs = "brand, model, display, camera, ram, battery")
-    public void testModelSpecs(String brand, String model, String display, String camera, String ram, String battery) {
+    public void testModelSpecs1(String brand, String model, String display, String camera, String ram, String battery) {
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -71,7 +71,7 @@ public class WebSampleTest extends AbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P1)
     @TestTag(name = "area test", value = "web")
-    public void testCompareModels() {
+    public void testCompareModels2() {
         // Open GSM Arena home page and verify page is opened
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
@@ -90,7 +90,7 @@ public class WebSampleTest extends AbstractTest {
     
     @Test(description = "JIRA#AUTO-0010")
     @MethodOwner(owner = "qpsdemo")
-    public void testNewsSearch1() {
+    public void testNewsSearch2() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
