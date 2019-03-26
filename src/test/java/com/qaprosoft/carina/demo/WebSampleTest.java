@@ -90,7 +90,7 @@ public class WebSampleTest extends AbstractTest {
     
     @Test(description = "JIRA#AUTO-0010")
     @MethodOwner(owner = "qpsdemo")
-    public void testNewsSearch() {
+    public void testNewsSearch1() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
