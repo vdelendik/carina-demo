@@ -50,18 +50,4 @@
 		</classes>
 	</test>
 
-
-	<test name="Substract operation test">
-		<parameter name="a" value="12"/>
-		<parameter name="b" value="3"/>
-		<parameter name="c" value="9"/>
-		<classes>
-			<class name="com.qaprosoft.carina.demo.DataprovidersSampleTest">
-				<methods>
-					<include name="testSubstractOperation"/>
-				</methods>
-			</class>
-		</classes>
-	</test>
-
 </suite>
