@@ -26,6 +26,9 @@
 		<classes>
 			<class name="com.qaprosoft.carina.demo.WebSampleTest" />
 		</classes>
+				<classes>
+			<class name="com.qaprosoft.carina.demo.WebSampleTest" />
+		</classes>
 	</test>
 	
 </suite>
