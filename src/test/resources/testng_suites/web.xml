@@ -17,7 +17,7 @@
 
 	<parameter name="jenkinsRegressionPipeline" value="Carina-Demo-Regression-Pipeline"/>
 	<parameter name="jenkinsPipelineEnvironments" value="DEMO"/>
-
+        <parameter name="jenkinsSlackChannels" value="slack-test,slack-test2"/>
 	<parameter name="jenkinsPipelineBrowsers" value="browser: chrome; browser: firefox"/>
 	<parameter name="jenkinsJobExecutionOrder" value="1"/>
 	<parameter name="jenkinsJobExecutionMode" value="continue"/>
