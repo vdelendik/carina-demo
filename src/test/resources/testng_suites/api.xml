@@ -12,12 +12,13 @@
 	<parameter name="jenkinsJobName" value="API-Demo-Test"/>
 	<parameter name="jenkinsJobType" value="api"/>
 	<parameter name="jenkinsEnvironments" value="DEMO"/>
-	<parameter name="jenkinsSlackChannels" value="slack-test"/>
+	<!-- <parameter name="jenkinsSlackChannels" value="slack-test"/> -->
+	<parameter name="jenkinsEmail" value="mverkhautsova@solvd.com"/>
 	
 	<parameter name="jenkinsRegressionPipeline" value="Carina-Demo-Regression-Pipeline"/>
 	<parameter name="jenkinsPipelineEnvironments" value="DEMO"/>	
 <!-- 	<parameter name="jenkinsPipelineLocales" value="fr_FR,en_US,es_ES,it_IT,de_DE,pt_PT,zh_CN:zh-rCN,ja_JP,ko_KR"/> -->
-	<parameter name="jenkinsJobExecutionMode" value=""/>
+	<parameter name="jenkinsJobExecutionMode" value="continue"/>
 <!-- 	<parameter name="jenkinsJobExecutionOrder" value="ordered"/> -->
 <!-- 	<parameter name="jenkinsQueueRegistration" value="false"/> -->
 
