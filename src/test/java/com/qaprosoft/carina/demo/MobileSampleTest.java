@@ -20,7 +20,7 @@ import utils.MobileContextUtils.View;
 
 public class MobileSampleTest extends AbstractTest {
 
-    @Test(description = "JIRA#DEMO-0011", invocationCount=100, threadPoolSize=20)
+    @Test(description = "JIRA#DEMO-0011", invocationCount=100, threadPoolSize=25)
     @MethodOwner(owner = "qpsdemo")
     public void testLoginUser() {
         String username = "Test user";
@@ -29,12 +29,12 @@ public class MobileSampleTest extends AbstractTest {
         Assert.assertTrue(welcomePage.isPageOpened(), "Welcome page isn't opened");
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertFalse(loginPage.isLoginBtnActive(), "Login button is active when it should be disabled");
-        loginPage.typeName(username);
-        loginPage.typePassword(password);
-        loginPage.selectMaleSex();
-        loginPage.checkPrivacyPolicyCheckbox();
-        CarinaDescriptionPageBase carinaDescriptionPage = loginPage.clickLoginBtn();
-        Assert.assertTrue(carinaDescriptionPage.isPageOpened(), "Carina description page isn't opened");
+//        loginPage.typeName(username);
+//        loginPage.typePassword(password);
+//        loginPage.selectMaleSex();
+//        loginPage.checkPrivacyPolicyCheckbox();
+//        CarinaDescriptionPageBase carinaDescriptionPage = loginPage.clickLoginBtn();
+//        Assert.assertTrue(carinaDescriptionPage.isPageOpened(), "Carina description page isn't opened");
     }
 
     @Test(description = "JIRA#DEMO-0011")
