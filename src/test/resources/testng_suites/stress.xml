@@ -20,7 +20,7 @@
 	<parameter name="jenkinsJobExecutionMode" value="continue" />
 	<parameter name="auto_screenshot" value="false" />
 
-	<test name="Mobile test">
+	<test name="Mobile test" parallel="true" thread-count="20">
 		<classes>
 			<class name="com.qaprosoft.carina.demo.MobileSampleTest">
 				<methods >
