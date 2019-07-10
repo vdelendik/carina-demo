@@ -16,6 +16,7 @@
 package com.qaprosoft.carina.demo;
 
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
@@ -43,6 +44,7 @@ public class APISampleTest extends AbstractTest {
         api.expectResponseStatus(HttpResponseStatusType.CREATED_201);
         api.callAPI();
         api.validateResponse();
+        Assert.fail("Manual error...");
     }
 
     @Test(description = "JIRA#DEMO-0002")
