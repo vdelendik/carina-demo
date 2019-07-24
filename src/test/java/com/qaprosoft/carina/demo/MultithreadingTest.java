@@ -1,8 +1,14 @@
 package com.qaprosoft.carina.demo;
 
+import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
+import com.qaprosoft.carina.demo.gui.components.FooterMenu;
+import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs;
+import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.HomePage;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,7 +29,7 @@ import java.util.stream.IntStream;
 
 import static javax.crypto.Cipher.ENCRYPT_MODE;
 
-public class MultithreadingTest {
+public class MultithreadingTest extends AbstractTest {
 
     private static final Logger LOGGER = Logger.getLogger(MultithreadingTest.class);
     private static final List<CompletableFuture<Void>> THREADS_FUTURES = new ArrayList<>();
@@ -40,11 +46,24 @@ public class MultithreadingTest {
 
     @Test
     @MethodOwner(owner = "qpsdemo")
-    public void test() {
+    public void testEncrypt() {
         IntStream.range(0, threadsCount).forEach(i -> {
             LOGGER.info("Thread with num " + i + " is starting");
             createThread(() -> {
-                doWork();
+                doWork(this::cryptoLoad);
+                LOGGER.info("Thread with num " + i + " is finishing");
+            });
+        });
+        waitAllFutures();
+    }
+
+    @Test
+    @MethodOwner(owner = "qpsdemo")
+    public void testWeb() {
+        IntStream.range(0, threadsCount).forEach(i -> {
+            LOGGER.info("Thread with num " + i + " is starting");
+            createThread(() -> {
+                doWork(this::webStart);
                 LOGGER.info("Thread with num " + i + " is finishing");
             });
         });
@@ -56,11 +75,11 @@ public class MultithreadingTest {
         THREADS_FUTURES.add(completableFuture);
     }
 
-    private void doWork() {
+    private void doWork(Runnable runnable) {
         long threadStartedAt = System.currentTimeMillis();
         long currentCPUUtilizationMillis = 0;
         while(currentCPUUtilizationMillis <= threadTtl) {
-            cryptoLoad();
+            runnable.run();
             currentCPUUtilizationMillis = System.currentTimeMillis() - threadStartedAt;
         }
     }
@@ -74,6 +93,22 @@ public class MultithreadingTest {
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
             LOGGER.error(e.getMessage(), e);
         }
+    }
+
+    private void webStart() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        // Open model compare page
+        FooterMenu footerMenu = homePage.getFooterMenu();
+        Assert.assertTrue(footerMenu.isUIObjectPresent(2), "Footer menu wasn't found!");
+        CompareModelsPage comparePage = footerMenu.openComparePage();
+        // Compare 3 models
+        List<ModelSpecs> specs = comparePage.compareModels("Samsung Galaxy J3", "Samsung Galaxy J5", "Samsung Galaxy J7 Pro");
+        // Verify model announced dates
+        Assert.assertEquals(specs.get(0).readSpec(ModelSpecs.SpecType.ANNOUNCED), "2015, November");
+        Assert.assertEquals(specs.get(1).readSpec(ModelSpecs.SpecType.ANNOUNCED), "2015, June");
+        Assert.assertEquals(specs.get(2).readSpec(ModelSpecs.SpecType.ANNOUNCED), "2017, June");
     }
 
     private byte[] generateCryptoKey() {

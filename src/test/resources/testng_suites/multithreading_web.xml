@@ -25,7 +25,7 @@
 		<classes>
 			<class name="com.qaprosoft.carina.demo.MultithreadingTest">
 				<methods>
-					<include name="testEncrypt"/>
+					<include name="testWeb"/>
 				</methods>
 			</class>
 		</classes>
