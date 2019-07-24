@@ -17,7 +17,10 @@
 	<parameter name="jenkinsRegressionPipeline" value="Carina-Demo-Regression-Pipeline"/>
 	<parameter name="jenkinsPipelineEnvironments" value="DEMO"/>
 	<parameter name="jenkinsJobExecutionMode" value="continue"/>
-
+	
+	<parameter name="stringParam::DEMO.threads_count::Thread count" value="200" />
+        <parameter name="stringParam::DEMO.thread_ttl::Thread time to live in ms" value="5000" />
+	
 	<test name="User API tests">
 		<classes>
 			<class name="com.qaprosoft.carina.demo.MultithreadingTest" />
